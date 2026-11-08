@@ -71,8 +71,8 @@
   let musicGain = null, voiceGain = null, voices = [], voiceSrc = null, lastVoiced = -1, voiceTimer = null;
   const MUSIC = .55, MUSIC_DUCK = .16;
   const setMusic = (v, tau = .9) => { if (!musicGain) return; musicGain.gain.cancelScheduledValues(ctx.currentTime); musicGain.gain.setTargetAtTime(v, ctx.currentTime, tau); };
-  // una voz por ancla: I–IV, las cinco de la parroquia, el Belén final en silencio (null) y «¡Paz y Bien!»
-  const VOICE_FILES = ['voz-1', 'voz-2', 'voz-3', 'voz-4', 'voz-p1', 'voz-p2', 'voz-p3', 'voz-p4', 'voz-p5', null, 'voz-5'];
+  // una voz por ancla: I, las cuatro de la parroquia, el Belén final en silencio (null) y «¡Paz y Bien!»
+  const VOICE_FILES = ['voz-1', 'voz-p1', 'voz-p3', 'voz-p4', 'voz-p5', null, 'voz-5'];
   const FINAL_VOICE = VOICE_FILES.length - 1, PORTAL = FINAL_VOICE - 1;
   const loadVoices = () => {
     VOICE_FILES.forEach((name, n) => {

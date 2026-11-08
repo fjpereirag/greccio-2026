@@ -1,11 +1,11 @@
 # Greccio 2026 · versión dinámica
 
-Nueva versión, más actual e impactante, del christmas «El Fuego y la Ternura de Greccio» de la Parroquia Cristo de la Paz (Franciscanos de Carabanchel). El contenido es el mismo y la puesta en escena es nueva:
+Nueva versión, más actual e impactante, del christmas «El Fuego y la Ternura de Greccio» de la Parroquia Cristo de la Paz (Franciscanos de Carabanchel). Recorrido más corto: la vela de Greccio (1223) y, enseguida, la parroquia hoy hasta el Belén final. La puesta en escena es nueva:
 
 - **Vuelo de entrada.** Al pulsar «Entrar» hay un destello y la cámara sale disparada desde lejos por el camino, con estelas de luz.
 - **Viaje con estelas.** Entre escenas, el polvo de luz se estira, las estrellas se alargan y el camino brilla más. Con música suena un susurro de viento.
 - **Llegada con destello.** Un barrido de brillo cruza la foto y una luz recorre su marco dorado. Las fotos tienen un zoom lento («fotos vivas») y una ligera inclinación 3D.
-- **Texto cinético.** Las palabras entran una a una, del desenfoque a la nitidez. Detrás de cada texto hay una palabra o número gigante en contorno: I, II, III, IV, Hoy, Paz, Fe, Vida, Ven.
+- **Texto cinético.** Las palabras entran una a una, del desenfoque a la nitidez. Detrás de cada texto hay una palabra o número gigante en contorno: I, Hoy, Fe, Vida, Ven.
 - **Belén final.** Rayos de luz giratorios y una lluvia de chispas de oro. «¡Paz y Bien!» lleva un brillo dorado que recorre las letras.
 - **Barra de progreso** dorada arriba.
 
@@ -22,11 +22,7 @@ avanzas hacia cada una, la atraviesas y sigues, **hasta llegar al Belén**.
 | # | Escena | Imagen en el camino | Frase |
 |---|--------|---------------------|-------|
 | I | La noche fría | `img/01-vela.webp` · una vela en la piedra | «En la fría noche de 1223…» |
-| II | El asombro del Poverello | `img/02-francisco.webp` · Francisco ante el pesebre vacío, la antorcha | «No hubo oro ni grandezas…» |
-| III | La humildad que nos salva | `img/03-nino.webp` · el Niño en la paja, unas manos que lo acogen | «Dios se despojó de todo poder…» |
-| IV | Greccio en nuestro corazón | `img/04-nacimiento.webp` · el nacimiento completo, la ventana con estrellas | «El Niño de Belén no es solo un recuerdo…» |
 | P1 | Cristo de la Paz · Greccio hoy | `img/p-belen-viviente.webp` · el belén viviente en la parroquia | «Hoy, en el Cristo de la Paz…» |
-| P2 | Cristo de la Paz · Paz y Bien | `img/p-fraile-altar.webp` · fraile ante el altar | «Ante el altar, el saludo de Francisco…» |
 | P3 | Cristo de la Paz · Una familia | `img/p-misa-ninos.webp` · misa con los niños | «Una comunidad que celebra…» |
 | P4 | Cristo de la Paz · Un nuevo Greccio | `img/p-jovenes.webp` · niños y jóvenes con la pancarta | «Niños y jóvenes…» |
 | P5 | Cristo de la Paz · Te esperamos | `img/p-fachada.webp` · la iglesia | «Esta Navidad, te esperamos…» |

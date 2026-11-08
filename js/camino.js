@@ -4,9 +4,9 @@
 (() => {
   const S = window.GRECCIO || (window.GRECCIO = { tone: 0, reduce: false });
   const cv = document.getElementById('camino'), cx = cv.getContext('2d');
-  // I–IV: Greccio · después, la Parroquia Cristo de la Paz hoy · al final, el Belén «Navidad 2026»
-  const SRC = ['img/01-vela.webp', 'img/02-francisco.webp', 'img/03-nino.webp', 'img/04-nacimiento.webp',
-    'img/p-belen-viviente.webp', 'img/p-fraile-altar.webp', 'img/p-misa-ninos.webp', 'img/p-jovenes.webp', 'img/p-fachada.webp',
+  // I: Greccio, 1223 · después, la Parroquia Cristo de la Paz hoy · al final, el Belén «Navidad 2026»
+  const SRC = ['img/01-vela.webp',
+    'img/p-belen-viviente.webp', 'img/p-misa-ninos.webp', 'img/p-jovenes.webp', 'img/p-fachada.webp',
     'img/05-portal.webp'];
   const LAST = SRC.length - 1;
   const imgs = SRC.map(src => { const i = new Image(); i.decoding = 'async'; i.src = src; return i; });
@@ -42,7 +42,7 @@
 
   const aspect = (i) => { const im = imgs[i]; return im.naturalWidth ? im.naturalHeight / im.naturalWidth : 1.68; };
   const finalPW = () => Math.min(W, H * .96 / aspect(LAST));
-  const stationW = (i) => (i === LAST ? finalPW() : Math.min((W < H ? (i >= 4 ? .74 : .5) : (i >= 4 ? .32 : .24)) * W, H * .46 / aspect(i))) * HOLD / F;
+  const stationW = (i) => (i === LAST ? finalPW() : Math.min((W < H ? (i >= 1 ? .74 : .5) : (i >= 1 ? .32 : .24)) * W, H * .46 / aspect(i))) * HOLD / F;
   const stationY = (i) => CAM_Y - (H * (i === LAST ? .5 : .355) - HOR) * HOLD / F;
   const project = (x, y, z, cam) => { const d = z - cam.z; if (d <= .05) return null; const k = F / d; return { x: CXs + (x - cam.x) * k, y: HOR - (y - cam.y) * k, k, d }; };
 
