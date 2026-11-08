@@ -1,0 +1,207 @@
+/* El Fuego y la Ternura de Greccio · móvil primero
+   Tipografía: clásica elegante (Cormorant Garamond) para las frases + palo seco limpio (Jost) para el cuerpo */
+:root{
+  --font-display:"Cormorant Garamond","EB Garamond",Georgia,serif;
+  --font-body:"Jost","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --step-phrase:clamp(1.6rem,6.6vw,2.8rem);
+  --step-hero:clamp(3.2rem,15vw,7rem);
+  --step-body:clamp(1rem,4vw,1.15rem);
+  --step-small:.76rem;
+  --bg:#07080C; --fg:#F4ECDD; --muted:#B9AE98; --fire:#E9A24A; --gold:#D9B26A; --gold-hi:#F2D49A;
+  --ink:#1E160D;
+  --line:color-mix(in srgb,var(--fg) 16%,transparent);
+  --gutter:max(1.25rem, env(safe-area-inset-left)); --col:32rem; --hud-h:56px;
+  --ease-out:cubic-bezier(.22,1,.36,1); --ease-in-out:cubic-bezier(.65,0,.35,1);
+  --dur-ui:380ms; --dur-reveal:1300ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:var(--step-body);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.is-gated{overflow:hidden}
+em{font-style:italic;color:var(--gold-hi)}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.skip{position:fixed;left:1rem;top:-60px;z-index:100;background:var(--gold);color:var(--ink);padding:.6rem 1rem;text-decoration:none}
+.skip:focus{top:1rem}
+::selection{background:var(--gold);color:var(--ink)}
+
+/* El camino */
+#camino{position:fixed;inset:0;z-index:0;display:block;background:#040814}
+/* (estilos del cuadro vivo anterior, sin uso) */
+.stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:#05070d}
+.cam{position:absolute;left:0;top:0;width:896px;height:1200px;transform-origin:0 0;will-change:transform}
+.cam img{display:block;width:896px;height:1200px;user-select:none;-webkit-user-drag:none}
+.fx{position:absolute;inset:0;width:896px;height:1200px;overflow:visible}
+.glow{mix-blend-mode:screen;transform-box:fill-box;transform-origin:center}
+.glow--star{animation:breathe 5s ease-in-out infinite}
+.glow--fire{animation:flicker 1.7s steps(9,end) infinite}
+.glow--manger{animation:breathe 6.5s ease-in-out infinite}
+.beam{mix-blend-mode:screen;transition:opacity 1.2s}
+@keyframes breathe{0%,100%{opacity:.75;transform:scale(.96)}50%{opacity:1;transform:scale(1.05)}}
+@keyframes flicker{0%{opacity:.7}20%{opacity:1}35%{opacity:.8}50%{opacity:.95}70%{opacity:.72}85%{opacity:1}100%{opacity:.78}}
+.twinkles circle{fill:#FFF9EC;animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.08}50%{opacity:.9}}
+.lp,.lp-glow,.lp-pulses{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.lp{stroke:#FFE6AE;stroke-width:3.4}
+.lp-glow{stroke:#F2B85A;stroke-width:16;opacity:.85;mix-blend-mode:screen}
+.lp-pulses{stroke:#fff;stroke-width:3.2;stroke-dasharray:2 46;animation:pulse-run 3.2s linear infinite;transition:opacity .8s}
+@keyframes pulse-run{to{stroke-dashoffset:-96}}
+.lp-head{fill:#FFF8E6;transition:opacity .4s;mix-blend-mode:screen}
+.motes circle{fill:#FFE2A0;opacity:0;animation:mote 9s ease-in-out infinite;mix-blend-mode:screen}
+@keyframes mote{0%{opacity:0;transform:translateY(8px)}30%{opacity:.8}70%{opacity:.6}100%{opacity:0;transform:translateY(-26px)}}
+.vignette{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(to bottom,rgba(5,7,13,.55),rgba(5,7,13,0) 18%,rgba(5,7,13,0) 48%,rgba(5,7,13,.78) 82%,rgba(5,7,13,.9)),
+  radial-gradient(ellipse at 50% 40%,rgba(0,0,0,0) 50%,rgba(0,0,0,.45))}
+.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+main{position:relative;z-index:2}
+.veil{position:relative}
+.veil::before{content:"";position:absolute;inset:-2rem -1.5rem;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at 45% 55%,rgba(7,8,12,.86) 0%,rgba(7,8,12,.62) 45%,rgba(7,8,12,0) 75%)}
+
+/* Umbral */
+.gate{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:var(--gutter);
+  background:radial-gradient(70vmax 60vmax at 50% 45%,rgba(40,24,10,.35),rgba(7,8,12,.96) 60%);transition:opacity 1.4s var(--ease-out),visibility 1.4s}
+.gate.is-gone{opacity:0;visibility:hidden}
+.gate__inner{text-align:center;max-width:24rem}
+.tau{color:var(--gold);display:block;margin:0 auto var(--space,1.2rem)}
+.eyebrow{font-size:var(--step-small);letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:0}
+.gate__title{font-family:var(--font-display);font-weight:400;font-size:clamp(2.9rem,13vw,5.2rem);line-height:.95;letter-spacing:-.01em;margin:1.2rem 0 1rem}
+.gate__lead{color:var(--muted);margin:0 0 2rem}
+.gate__actions{display:grid;gap:.75rem}
+.gate__note{margin-top:1.4rem;font-size:var(--step-small);color:var(--muted);letter-spacing:.04em}
+.btn{min-height:52px;padding:0 1.5rem;border:1px solid var(--line);font-size:.95rem;letter-spacing:.08em;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  transition:background var(--dur-ui) var(--ease-out),color var(--dur-ui),border-color var(--dur-ui)}
+.btn:active{transform:scale(.98)}
+.btn--gold{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:400}
+@media (hover:hover){.btn:hover{border-color:var(--gold);color:var(--gold)}.btn--gold:hover{background:transparent}}
+
+/* HUD */
+.hud{position:fixed;top:0;left:0;right:0;z-index:40;height:calc(var(--hud-h) + env(safe-area-inset-top));padding:env(safe-area-inset-top) calc(var(--gutter) - .6rem) 0;
+  display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,8,12,.85),rgba(7,8,12,0))}
+.hud__brand,.icon{width:44px;height:44px;display:grid;place-items:center;color:var(--gold)}
+.hud__dots{list-style:none;display:flex;gap:.2rem;margin:0;padding:0}
+.hud__dots a{display:grid;place-items:center;width:28px;height:44px}
+.hud__dots a::after{content:"";width:7px;height:7px;border-radius:50%;border:1px solid var(--gold);transition:background var(--dur-ui),transform var(--dur-ui)}
+.hud__dots a[aria-current="true"]::after{background:var(--gold);transform:scale(1.3);box-shadow:0 0 12px var(--fire)}
+#btn-sound .off{opacity:1;transition:opacity var(--dur-ui)}
+#btn-sound[aria-pressed="true"] .off{opacity:0}
+
+/* Escenas: mucho recorrido de scroll para que la cámara viaje; el texto entra abajo */
+.scene{min-height:170svh;display:flex;flex-direction:column;justify-content:flex-end;width:100%;max-width:calc(var(--col) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter) 10svh;position:relative}
+#noche{min-height:100svh;padding-bottom:9svh}
+.card{max-width:var(--col)}
+.scene__num{font-size:var(--step-small);letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:0 0 1.1rem}
+.scene__num span{color:var(--muted);letter-spacing:.14em}
+.phrase{font-family:var(--font-display);font-weight:400;font-size:var(--step-phrase);line-height:1.12;margin:0 0 1.4rem;text-wrap:pretty}
+.year{font-style:italic;color:var(--fire)}
+.voice{margin:0;padding-left:1rem;border-left:1px solid var(--fire);color:var(--muted);font-size:1rem;font-style:italic}
+.scroll-cue{position:absolute;left:50%;bottom:3svh;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;margin:0;
+  font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.scroll-cue span{width:1px;height:42px;background:linear-gradient(var(--fire),transparent);animation:cue 2.4s var(--ease-in-out) infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* Cierre: el portal de Belén al fondo */
+.scene--final{min-height:auto;justify-content:flex-start;padding-bottom:calc(8svh + env(safe-area-inset-bottom))}
+.portal-space{height:120svh;display:flex;align-items:flex-end;justify-content:center;padding-bottom:22svh}
+.portal-label{opacity:0!important;font-family:var(--font-display);font-style:italic;font-size:1.5rem;color:var(--gold-hi);margin:0;text-shadow:0 2px 18px rgba(7,8,12,.9)}
+.final{padding-top:10svh}
+.final{text-align:center;max-width:var(--col);margin:0 auto}
+.final .tau{margin-bottom:1rem}
+.final__title{font-family:var(--font-display);font-weight:400;font-size:var(--step-hero);line-height:.88;margin:.4rem 0 1.4rem}
+.final__text{font-family:var(--font-display);font-size:clamp(1.3rem,5.4vw,1.8rem);line-height:1.3;margin:0 0 1.6rem}
+.sign{font-size:.9rem;color:var(--muted);letter-spacing:.04em;margin:0 0 1.8rem}
+.sign__xmas{display:block;font-family:var(--font-display);font-style:italic;font-size:1.6rem;color:var(--gold-hi);letter-spacing:0;margin-bottom:.3rem}
+.share{display:grid;gap:.7rem;max-width:20rem;margin:0 auto}
+.link{min-height:44px;color:var(--muted);text-decoration:underline;text-underline-offset:4px;font-size:.9rem}
+
+/* Revelados */
+.line{display:block;overflow:hidden;padding-bottom:.08em}
+.line>span{display:block;transform:translateY(105%);transition:transform var(--dur-reveal) var(--ease-out)}
+.line:nth-child(2)>span{transition-delay:.15s}
+.is-in .line>span{transform:none}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity var(--dur-reveal) var(--ease-out),transform var(--dur-reveal) var(--ease-out)}
+.reveal.is-in{opacity:1;transform:none}
+.voice.reveal{transition-delay:.35s}
+
+@media (min-width:900px){ :root{--col:36rem} .scene{padding-left:8vw;margin-left:0} .final{margin:0 auto} .scene--final{margin:0 auto} }
+
+/* Movimiento reducido */
+html.reduce-motion{--dur-reveal:150ms;scroll-behavior:auto}
+html.reduce-motion .line>span,html.reduce-motion .reveal{transform:none!important}
+html.reduce-motion .scroll-cue span,html.reduce-motion .glow,html.reduce-motion .twinkles circle,html.reduce-motion .lp-pulses,html.reduce-motion .motes circle{animation:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.scroll-cue span,.glow,.twinkles circle,.lp-pulses,.motes circle{animation:none}.line>span,.reveal{transform:none!important}}
+
+/* Recorrido automático */
+.hud__tools{display:flex;align-items:center}
+#btn-play .i-play{display:none}
+#btn-play[aria-pressed="false"] .i-pause{display:none}
+#btn-play[aria-pressed="false"] .i-play{display:inline}
+
+/* Parroquia Cristo de la Paz */
+.scene--p{min-height:150svh}
+.sign__logo{display:block;width:84px;height:auto;margin:0 auto 1rem;border-radius:6px;opacity:.95}
+
+/* ===================== Greccio 2026 · versión dinámica ===================== */
+:root{--step-phrase:clamp(1.85rem,7.6vw,3.2rem)}
+/* barra de progreso */
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:45;background:rgba(242,212,154,.12)}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#E9A24A,#FFF2CF);transform:scaleX(0);transform-origin:0 50%;box-shadow:0 0 12px #E9A24A}
+
+/* umbral: título que sube línea a línea y un halo que respira */
+.gate{background:radial-gradient(60vmax 50vmax at 50% 38%,rgba(70,44,14,.45),rgba(4,6,14,.97) 62%)}
+.gate::before{content:"";position:absolute;left:50%;top:18%;width:60vmin;height:60vmin;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,190,.35),rgba(255,200,120,.08) 40%,transparent 70%);animation:halo 5s ease-in-out infinite;pointer-events:none}
+@keyframes halo{50%{transform:translate(-50%,-50%) scale(1.15);opacity:.7}}
+.gate__inner{position:relative}
+.gate__title{font-size:clamp(3.2rem,15vw,6rem);line-height:.9}
+.gl{display:block;overflow:hidden;padding-bottom:.06em}
+.gl>span{display:block;transform:translateY(110%);animation:rise 1.4s var(--ease-out) forwards}
+.gl:nth-child(2)>span{animation-delay:.18s}.gl:nth-child(3)>span{animation-delay:.36s}
+@keyframes rise{to{transform:none}}
+.gate .eyebrow,.gate__lead,.gate__actions,.gate__note{opacity:0;animation:fadeup 1.2s var(--ease-out) forwards}
+.gate .eyebrow{animation-delay:.1s}.gate__lead{animation-delay:.7s}.gate__actions{animation-delay:.9s}.gate__note{animation-delay:1.1s}
+@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.gate.is-gone{transform:scale(1.25);filter:blur(6px);transition:opacity 1.2s var(--ease-out),transform 1.6s var(--ease-out),filter 1.2s,visibility 1.6s}
+.btn--gold{box-shadow:0 0 0 0 rgba(242,196,110,.6);animation:pulse 2.6s ease-out 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(242,196,110,.55)}70%{box-shadow:0 0 0 18px rgba(242,196,110,0)}100%{box-shadow:0 0 0 0 rgba(242,196,110,0)}}
+.btn{border-radius:999px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background-color:rgba(255,255,255,.04)}
+.btn--gold{background:linear-gradient(135deg,#F7DDA2,#D9A54E);color:#1E160D;border:0}
+
+/* destello blanco al entrar */
+body::after{content:"";position:fixed;inset:0;z-index:70;pointer-events:none;background:radial-gradient(circle at 50% 30%,#FFF8E8,rgba(255,226,170,.6) 40%,rgba(255,200,120,0) 75%);opacity:0}
+body.is-flying::after{animation:flashin 1.6s ease-out}
+@keyframes flashin{0%{opacity:0}12%{opacity:.85}100%{opacity:0}}
+
+/* etiquetas de escena como píldoras de cristal */
+.scene__num{display:inline-flex;gap:.4rem;align-items:center;padding:.45rem .9rem;border:1px solid rgba(242,212,154,.35);border-radius:999px;
+  background:rgba(10,14,30,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:.68rem}
+
+/* número/palabra gigante fantasma detrás de cada texto */
+.card[data-ghost]{position:relative}
+.card[data-ghost]::after{content:attr(data-ghost);position:absolute;right:-.2rem;top:-.55em;z-index:-1;pointer-events:none;
+  font-family:var(--font-display);font-style:italic;font-weight:500;font-size:clamp(6rem,34vw,13rem);line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(242,212,154,.38);opacity:0;transform:translateX(30px);
+  transition:opacity 1.6s var(--ease-out),transform 2.2s var(--ease-out)}
+.card[data-ghost]:has(.is-in)::after{opacity:1;transform:none}
+
+/* texto cinético: palabra a palabra, del desenfoque a la nitidez */
+.phrase.reveal,.final__text.reveal{opacity:1;transform:none}
+.w{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.45em) scale(.96);
+  transition:opacity .9s var(--ease-out),filter .9s var(--ease-out),transform 1.1s var(--ease-out);transition-delay:calc(var(--i) * 55ms)}
+.is-in .w{opacity:1;filter:none;transform:none}
+.phrase em{text-shadow:0 0 22px rgba(242,180,90,.55)}
+.phrase{letter-spacing:-.005em;text-shadow:0 2px 24px rgba(3,4,9,.85)}
+
+/* ¡Paz y Bien! con brillo de oro que recorre las letras */
+.final__title{font-size:clamp(4rem,19vw,8.5rem)}
+.final__title span span{background:linear-gradient(100deg,#F4ECDD 20%,#FFF6DA 40%,#F2C46E 50%,#FFF6DA 60%,#F4ECDD 80%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 4.5s linear infinite}
+.final__title em{color:transparent}
+@keyframes sheen{from{background-position:120% 0}to{background-position:-130% 0}}
+.sign__logo{width:96px;box-shadow:0 0 40px rgba(242,196,110,.35)}
+
+html.reduce-motion .w{filter:none;transform:none;transition:opacity .2s}
+html.reduce-motion .final__title span span,html.reduce-motion .gate::before,html.reduce-motion .btn--gold{animation:none}
+@media (prefers-reduced-motion:reduce){.w{filter:none;transform:none}.gl>span{animation:none;transform:none}.final__title span span{animation:none}}
